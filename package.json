@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-study-book",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Obsidian plugin that turns a video URL into a study note with your own API key (BYOK).",
 	"main": "main.js",
 	"type": "module",

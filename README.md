@@ -136,6 +136,28 @@ tags:
 - The transcript is sent to the analysis provider, because the analysis needs
   the text.
 
+## Permissions and network use
+
+The automated review of the Community directory requires these to be
+spelled out. Read this before installing.
+
+- **Paid access.** The plugin has no key of its own: every run is billed to
+  the API account you configured (OpenAI, Anthropic or Google, depending on
+  the provider you choose for each step).
+- **Network.** Two kinds of calls leave your machine, and only these:
+  1. `yt-dlp` fetches the video metadata and the audio from the page you
+     pasted (Instagram, YouTube or any site `yt-dlp` supports).
+  2. The provider you configured receives the audio (transcription) and the
+     transcript (analysis), over HTTPS.
+- **Files outside the vault.** The plugin writes the temporary audio inside
+  the vault (`.study-book`, deleted after the run) and reads your settings
+  from the vault. Two things touch files outside the vault:
+  1. The `yt-dlp` executable itself, which you install and keep on the PATH
+     (or point the settings at). The plugin runs it as a background process.
+  2. **Only if you turn it on**, **Cookies from browser** reads the cookie
+     store of the browser you select, so posts that require login can be
+     downloaded. Nothing is read from your browser otherwise.
+
 ## Development
 
 ```bash

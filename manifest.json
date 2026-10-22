@@ -1,9 +1,9 @@
 {
 	"id": "study-book",
 	"name": "Study Book",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minAppVersion": "1.5.0",
-	"description": "Turn a video URL into a study note in your vault: download, transcribe and summarize with your own API key (BYOK).",
+	"description": "Turn a video URL into a study note in your vault: download, transcribe and summarize with your own API key.",
 	"author": "Carlos Magnani",
 	"authorUrl": "https://github.com/CarlosMagnani",
 	"isDesktopOnly": true

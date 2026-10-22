@@ -9,7 +9,7 @@
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
-import { Notice, Plugin } from 'obsidian';
+import { Notice, Plugin, normalizePath } from 'obsidian';
 
 import {
 	DEFAULT_SETTINGS,
@@ -193,7 +193,7 @@ export default class StudyBookPlugin extends Plugin {
 	 * Writes the note inside the configured folder.
 	 */
 	private async saveNote(fileName: string, content: string): Promise<string> {
-		const folder = this.settings.notesFolder.trim();
+		const folder = normalizePath(this.settings.notesFolder.trim());
 		if (folder) {
 			await ensureFolder(this.app.vault, folder);
 		}

@@ -1,0 +1,21 @@
+/* Study Book — the plugin uses the Obsidian theme, so there is very little to
+   style. These rules only shape the modal and the settings screen. */
+
+.study-book-modal-title {
+	font-weight: var(--bold-weight);
+	font-size: 1.1em;
+	margin-bottom: 0.5em;
+}
+
+.study-book-modal-hint {
+	color: var(--text-muted);
+	font-size: 0.9em;
+	margin-bottom: 1em;
+}
+
+.study-book-transcript-input {
+	width: 100%;
+	min-height: 12em;
+	font-family: var(--font-monospace);
+	resize: vertical;
+}

@@ -1,0 +1,38 @@
+{
+	"name": "obsidian-study-book",
+	"version": "0.1.0",
+	"description": "Obsidian plugin that turns a video URL into a study note with your own API key (BYOK).",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc --noEmit --skipLibCheck && node esbuild.config.mjs production",
+		"typecheck": "tsc --noEmit --skipLibCheck",
+		"test": "node --test --no-warnings tests/*.test.ts",
+		"lint": "eslint ."
+	},
+	"keywords": [
+		"obsidian",
+		"obsidian-plugin",
+		"study",
+		"notes",
+		"transcription",
+		"byok"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@eslint/js": "^9.39.4",
+		"@types/node": "^22.15.17",
+		"builtin-modules": "^5.4.0",
+		"esbuild": "^0.25.5",
+		"eslint": "^9.39.4",
+		"eslint-plugin-obsidianmd": "^0.4.2",
+		"globals": "^17.13.0",
+		"obsidian": "latest",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.59.1"
+	},
+	"allowScripts": {
+		"esbuild": true
+	}
+}

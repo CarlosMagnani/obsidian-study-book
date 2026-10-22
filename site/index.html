@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Study Book — turn any video URL into a study note in your Obsidian vault</title>
+		<meta
+			name="description"
+			content="An Obsidian plugin that downloads a video, transcribes it and writes the study notes as a Markdown note. You bring the API key: OpenAI, Anthropic or Gemini."
+		/>
+		<meta property="og:title" content="Study Book" />
+		<meta property="og:description" content="Turn any video URL into a study note in your Obsidian vault." />
+		<meta property="og:image" content="assets/demo-poster.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+		<link rel="stylesheet" href="styles.css" />
+		<noscript>
+			<style>
+				.reveal {
+					opacity: 1;
+					transform: none;
+				}
+			</style>
+		</noscript>
+	</head>
+	<body>
+		<a class="skip" href="#demo">Skip to the demo</a>
+
+		<header class="nav">
+			<div class="nav-inner">
+				<a class="brand" href="#top">
+					<img src="assets/logo.svg" alt="" width="28" height="28" />
+					<span>Study Book</span>
+				</a>
+				<nav class="nav-links">
+					<a href="#how">How it works</a>
+					<a href="#providers">Providers</a>
+					<a href="#note">The note</a>
+					<a href="#faq">FAQ</a>
+					<a class="nav-cta" href="https://github.com/CarlosMagnani/obsidian-study-book">GitHub</a>
+				</nav>
+			</div>
+		</header>
+
+		<main id="top">
+			<section class="hero">
+				<p class="eyebrow">Obsidian plugin · MIT licensed</p>
+				<h1>Turn any video URL into a study note.</h1>
+				<p class="lede">
+					Study Book downloads the audio, transcribes it and writes the notes as plain
+					Markdown in your vault: a summary, the key points, the moments worth
+					revisiting and the transcript. You bring the API key, so you pay your own
+					provider and nobody else sees your material.
+				</p>
+				<div class="cta-row">
+					<a class="button button-primary" href="https://github.com/CarlosMagnani/obsidian-study-book/releases">
+						Download the plugin
+					</a>
+					<a class="button button-quiet" href="#demo">Watch the demo</a>
+				</div>
+				<dl class="hero-facts">
+					<div>
+						<dt>Requires</dt>
+						<dd>Obsidian 1.5+ on desktop</dd>
+					</div>
+					<div>
+						<dt>Cost</dt>
+						<dd>Your own API key, no account here</dd>
+					</div>
+					<div>
+						<dt>Output</dt>
+						<dd>Markdown with frontmatter</dd>
+					</div>
+				</dl>
+			</section>
+
+			<section class="section" id="demo">
+				<div class="section-head reveal">
+					<p class="eyebrow">The demo</p>
+					<h2>A reel goes in, a note comes out.</h2>
+					<p class="section-text">
+						This is a real run: the audio of a public Instagram reel, the transcription
+						produced by a speech to text model and the analysis written by a language
+						model. Nothing in the video is a mockup.
+					</p>
+				</div>
+
+				<figure class="video-shell reveal">
+					<video
+						controls
+						preload="metadata"
+						poster="assets/demo-poster.png"
+						playsinline
+						aria-label="Demo of a reel being transcribed and turned into a study note"
+					>
+						<source src="assets/demo.mp4" type="video/mp4" />
+						Your browser cannot play this video. The demo shows a reel being
+						transcribed and the study note that comes out of it.
+					</video>
+					<figcaption>
+						Real reel, real transcript, real analysis. The plugin runs the same three
+						steps inside your vault.
+					</figcaption>
+				</figure>
+			</section>
+
+			<section class="section" id="how">
+				<div class="section-head reveal">
+					<p class="eyebrow">How it works</p>
+					<h2>Three steps, one command.</h2>
+				</div>
+
+				<ol class="steps">
+					<li class="step reveal">
+						<span class="step-index">01</span>
+						<h3>Download</h3>
+						<p>
+							The plugin runs <code>yt-dlp</code> on your machine and saves the audio
+							inside a hidden folder of your vault. No file leaves your computer
+							before you ask it to.
+						</p>
+					</li>
+					<li class="step reveal">
+						<span class="step-index">02</span>
+						<h3>Transcribe</h3>
+						<p>
+							The audio goes to the transcription provider you configured. OpenAI and
+							Gemini both return text with timestamps, so the note can point back to
+							the exact moment.
+						</p>
+					</li>
+					<li class="step reveal">
+						<span class="step-index">03</span>
+						<h3>Write the note</h3>
+						<p>
+							The transcript goes to the analysis model, which returns a topic, a
+							summary, key points and moments. The plugin writes it as Markdown in
+							the folder you chose.
+						</p>
+					</li>
+				</ol>
+			</section>
+
+			<section class="section" id="providers">
+				<div class="section-head reveal">
+					<p class="eyebrow">Bring your own key</p>
+					<h2>Your provider, your bill, your rules.</h2>
+					<p class="section-text">
+						The plugin has no account, no server and no key of its own. The key is
+						stored in this vault only, and every request goes straight from your
+						machine to the provider you chose.
+					</p>
+				</div>
+
+				<div class="bento">
+					<article class="card card-wide reveal">
+						<h3>OpenAI</h3>
+						<p>
+							Transcription and analysis, with strict JSON schemas so the note always
+							has the same shape.
+						</p>
+						<p class="tag tag-blue">default</p>
+					</article>
+					<article class="card reveal">
+						<h3>Anthropic</h3>
+						<p>Writes the analysis through a tool call with a fixed schema.</p>
+						<p class="tag tag-yellow">analysis only</p>
+					</article>
+					<article class="card reveal">
+						<h3>Google Gemini</h3>
+						<p>Reads the audio directly and returns JSON with a response schema.</p>
+						<p class="tag tag-green">transcription and analysis</p>
+					</article>
+					<article class="card card-wide reveal">
+						<h3>Compatible gateways</h3>
+						<p>
+							Every provider accepts a custom base URL, so a proxy or a gateway that
+							speaks the same API works without a code change.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="section" id="note">
+				<div class="section-head reveal">
+					<p class="eyebrow">The note</p>
+					<h2>Plain Markdown, frontmatter included.</h2>
+					<p class="section-text">
+						The output is a file in your vault, not a database. Dataview, Canvas,
+						Templates, Sync and every other plugin keep working, because it is only
+						Markdown.
+					</p>
+				</div>
+
+				<div class="window reveal">
+					<div class="window-bar">
+						<span class="dot"></span><span class="dot"></span><span class="dot"></span>
+						<span class="window-title">Front-head lock.md</span>
+					</div>
+					<div class="window-body">
+						<pre><code>---
+title: "Front-head lock"
+source: "https://www.instagram.com/reel/DeCI9l1RZKE/"
+video_id: "DeCI9l1RZKE"
+topic: "Front-head lock in modern grappling"
+language: "pt"
+provider: "openai"
+model: "gpt-5.6-luna"
+created: "2026-10-22T10:00:00.000Z"
+tags:
+  - study-book
+---
+
+# Front-head lock
+
+&gt; [!abstract] Summary
+&gt; The video clarifies that front-head lock is not just for finishing.
+
+## Key points
+
+- Front-head lock is not solely for finishing
+- Front-head lock controls the opponent's posture
+
+## Moments
+
+- **00:12** Front-head lock controls the opponent's posture</code></pre>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="privacy">
+				<div class="privacy-grid">
+					<div class="section-head reveal">
+						<p class="eyebrow">Privacy</p>
+						<h2>What leaves your machine, and what does not.</h2>
+					</div>
+					<ul class="privacy-list">
+						<li class="reveal">
+							<span class="tick" aria-hidden="true"></span>
+							<div>
+								<h3>No telemetry</h3>
+								<p>No analytics, no crash reports, no background calls of any kind.</p>
+							</div>
+						</li>
+						<li class="reveal">
+							<span class="tick" aria-hidden="true"></span>
+							<div>
+								<h3>The key stays here</h3>
+								<p>
+									It is stored in
+									<code>.obsidian/plugins/study-book/data.json</code> and only
+									travels inside the request to the provider you selected.
+								</p>
+							</div>
+						</li>
+						<li class="reveal">
+							<span class="tick" aria-hidden="true"></span>
+							<div>
+								<h3>The audio is temporary</h3>
+								<p>
+									It is deleted right after the run, unless you turn on
+									<em>Keep the audio file</em>.
+								</p>
+							</div>
+						</li>
+						<li class="reveal">
+							<span class="tick" aria-hidden="true"></span>
+							<div>
+								<h3>The transcript is sent</h3>
+								<p>
+									The analysis needs the text, so the transcript goes to the
+									analysis provider. That is the only other copy that exists.
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="section" id="faq">
+				<div class="section-head reveal">
+					<p class="eyebrow">FAQ</p>
+					<h2>Before you install.</h2>
+				</div>
+
+				<div class="faq">
+					<details class="reveal">
+						<summary>Do I need an API key?</summary>
+						<p>
+							Yes, at least one. The plugin never ships a key of its own. OpenAI is
+							the default, and Anthropic and Gemini are one dropdown away.
+						</p>
+					</details>
+					<details class="reveal">
+						<summary>Does it work without a GPU?</summary>
+						<p>
+							Yes. Every model runs on the provider's servers. The only local work is
+							the download, which is light.
+						</p>
+					</details>
+					<details class="reveal">
+						<summary>Why does it need yt-dlp?</summary>
+						<p>
+							yt-dlp is the tool that knows how to fetch the audio of a video. It is
+							free and open source. If it is already on your PATH the plugin finds
+							it; otherwise you point the settings at the binary.
+						</p>
+					</details>
+					<details class="reveal">
+						<summary>Can I use a transcript I already have?</summary>
+						<p>
+							Yes. The command <em>Analyze a transcript that you already have</em>
+							skips the download and the transcription entirely.
+						</p>
+					</details>
+					<details class="reveal">
+						<summary>Does it work on mobile?</summary>
+						<p>
+							No, and the plugin says so in the manifest. Downloading a video needs a
+							process on your operating system, which mobile does not allow.
+						</p>
+					</details>
+					<details class="reveal">
+						<summary>Can I change the shape of the note?</summary>
+						<p>
+							Yes. The folder, the language of the notes and the list of allowed
+							topics are settings. The Markdown template itself lives in
+							<code>src/pipeline/note.ts</code>, and it is a plain function.
+						</p>
+					</details>
+				</div>
+			</section>
+
+			<section class="section closing">
+				<div class="closing-inner reveal">
+					<h2>Read a video once. Keep the notes forever.</h2>
+					<p>
+						Install the plugin, paste a URL, and the note is already in your vault.
+					</p>
+					<div class="cta-row">
+						<a class="button button-primary" href="https://github.com/CarlosMagnani/obsidian-study-book/releases">
+							Download the plugin
+						</a>
+						<a class="button button-quiet" href="https://github.com/CarlosMagnani/obsidian-study-book">
+							Read the documentation
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="footer-inner">
+				<p>Study Book · MIT licensed · built by Carlos Magnani</p>
+				<ul class="footer-links">
+					<li><a href="https://github.com/CarlosMagnani/obsidian-study-book">Source code</a></li>
+					<li><a href="https://github.com/CarlosMagnani/obsidian-study-book/releases">Releases</a></li>
+					<li><a href="https://github.com/CarlosMagnani/obsidian-study-book/blob/main/docs/PUBLISHING.md">Publishing guide</a></li>
+				</ul>
+			</div>
+		</footer>
+
+		<script>
+			// Revelacao suave ao entrar na tela.
+			const blocks = document.querySelectorAll('.reveal');
+			if ('IntersectionObserver' in window) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('is-visible');
+								observer.unobserve(entry.target);
+							}
+						}
+					},
+					{ rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+				);
+				for (const block of blocks) {
+					observer.observe(block);
+				}
+			} else {
+				for (const block of blocks) {
+					block.classList.add('is-visible');
+				}
+			}
+		</script>
+	</body>
+</html>
